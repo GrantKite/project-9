@@ -1,0 +1,92 @@
+#include<stdio.h>
+#include<stdbool.h>
+#include<string.h>
+
+	void sort(int num[], char name[][100]);
+	void fileRead(char arr[10][100], int str[10]);
+
+	int main(){
+
+	int col, row, index = 0;
+
+	int newNumb = 20;
+	char newName[10] = {"Zavier"};
+
+	int numbers[10];
+	char array[10][100];
+	
+
+	fileRead(array, numbers);
+	fileWrite(array, numbers, newNumb, newName);
+	sort(numbers, array);
+
+
+	for(index = 0; index < 10; index++){
+		printf("%s %d\n", array[index], numbers[index]);
+	}
+
+	return 0;
+}
+
+
+	void fileRead( char arr[10][100], int str[10]){
+			FILE* num;
+			int index;
+
+			if((num = fopen("scores.txt", "r")) != NULL){
+				for(index = 0; index < 10; index++){
+					fscanf(num, "%s %d", arr[index], &str[index]);
+				}
+			}
+			else{
+			printf("couldn't open the file");
+			}
+			fclose (num);
+	}
+
+	void fileWrite(char arr[10][100], int str[10], int newI, char newC[100]){
+			FILE* score;
+			int index;
+
+			str[9] = newI;
+			arr[9][100] = newC;
+
+			if((score = fopen("scores.txt", "w")) != NULL){
+				for(index = 0; index < 10; index++){
+					fprintf(score, "%s %d", arr, &str);
+
+				}
+			}
+			
+
+			else{
+			printf("Nah, dawg");
+			}
+			fclose (score);
+	}
+
+	
+
+	void sort(int num[], char name[][100]){
+		int sPlace, swap;
+		char nPlace[100];
+			for(int index = 0; index < 9; index++){
+			for(int larger = 0; larger <= 9 - index; larger++){
+					if(num[larger] < num[larger + 1]){
+						sPlace = num[larger];
+						strcpy(nPlace, name[larger]);
+						num[larger] = num[larger + 1];
+						strcpy(name[larger], name[larger + 1]);
+						num[larger+1] = sPlace;
+						strcpy(name[larger + 1], nPlace);
+						swap = 1;
+						}
+				if(swap == 0){
+				break;
+				}
+			}
+		}
+}
+
+
+
